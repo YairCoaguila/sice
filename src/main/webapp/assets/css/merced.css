@@ -1,0 +1,673 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+:root {
+    --merced-red: #1e3a5f;
+    --merced-red-dark: #132542;
+    --merced-red-light: #e8edf4;
+    --merced-gray: #6b7280;
+    --merced-gray-dark: #4b5563;
+    --merced-text: #333;
+    --merced-muted: #888;
+    --merced-border: #e5e7eb;
+    --merced-bg: #ffffff;
+    --merced-form-bg: #f9fafb;
+
+    --bs-primary: #1e3a5f;
+    --bs-primary-rgb: 30, 58, 95;
+    --bs-link-color: #1e3a5f;
+    --bs-link-hover-color: #132542;
+    --bs-focus-ring-color: rgba(156, 27, 34, 0.25);
+}
+
+[data-bs-theme=dark] {
+    --merced-red: #2d5a8e;
+    --merced-red-dark: #1e3a5f;
+    --merced-red-light: #1a2d4a;
+    --merced-gray: #9ca3af;
+    --merced-gray-dark: #d1d5db;
+    --merced-text: #e5e7eb;
+    --merced-muted: #9ca3af;
+    --merced-border: #374151;
+    --merced-bg: #0f172a;
+    --merced-form-bg: #1e293b;
+    --bs-body-bg: #0f172a;
+    --bs-body-color: #e5e7eb;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body.merced-page {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--merced-bg);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    color: var(--merced-text);
+}
+
+/* ── Header institucional ── */
+.merced-header {
+    background-color: var(--merced-red);
+    color: white;
+    padding: 25px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    flex-shrink: 0;
+}
+
+.merced-header-logo {
+    font-size: 3rem;
+    line-height: 1;
+}
+
+.merced-header-text {
+    text-align: left;
+    line-height: 1.1;
+}
+
+.merced-header-small {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.merced-header-large {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin: 0;
+    letter-spacing: 0.5px;
+}
+
+.merced-header-line {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+}
+
+.merced-header-line::before,
+.merced-header-line::after {
+    content: '';
+    height: 1px;
+    background-color: white;
+    flex-grow: 1;
+}
+
+/* ── Contenido principal ── */
+.merced-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
+}
+
+.merced-main--center {
+    justify-content: center;
+}
+
+.merced-title {
+    color: var(--merced-text);
+    font-size: 2.2rem;
+    font-weight: 400;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.merced-subtitle {
+    color: #444;
+    font-size: 1.4rem;
+    font-weight: 400;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.merced-subtitle--sm {
+    font-size: 1.6rem;
+    margin-bottom: 40px;
+}
+
+/* ── Formularios ── */
+.merced-form-container {
+    width: 100%;
+    max-width: 600px;
+    background: var(--merced-form-bg);
+    padding: 30px;
+    border-radius: 8px;
+    border: 1px solid var(--merced-border);
+}
+
+.merced-form-container--wide {
+    max-width: 900px;
+}
+
+.merced-page .form-control,
+.merced-page .form-select {
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    padding: 10px 15px;
+    font-size: 0.95rem;
+}
+
+.merced-page .form-control:focus,
+.merced-page .form-select:focus {
+    box-shadow: none;
+    border-color: var(--merced-gray);
+}
+
+.merced-page .form-label {
+    font-weight: 500;
+    font-size: 0.85rem;
+    color: var(--merced-gray-dark);
+    margin-bottom: 5px;
+}
+
+.merced-readonly {
+    background-color: #e5e7eb;
+    cursor: not-allowed;
+    color: var(--merced-gray);
+}
+
+/* ── Botones ── */
+.merced-btn {
+    background-color: var(--merced-gray);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 12px 30px;
+    font-size: 1rem;
+    transition: background-color 0.2s;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+}
+
+.merced-btn:hover {
+    background-color: var(--merced-gray-dark);
+    color: white;
+}
+
+.merced-btn--full {
+    width: 100%;
+    margin-top: 10px;
+}
+
+.merced-btn--red {
+    background-color: var(--merced-red);
+}
+
+.merced-btn--red:hover {
+    background-color: var(--merced-red-dark);
+    color: white;
+}
+
+.merced-btn--outline {
+    background: transparent;
+    color: var(--merced-red);
+    border: 2px solid var(--merced-red);
+}
+
+.merced-btn--outline:hover {
+    background: var(--merced-red);
+    color: white;
+}
+
+/* ── Búsqueda DNI ── */
+.merced-search {
+    display: flex;
+    gap: 15px;
+    width: 100%;
+    max-width: 600px;
+    justify-content: center;
+    align-items: center;
+}
+
+.merced-search .form-control {
+    flex: 1;
+    padding: 12px 15px;
+}
+
+/* ── Alertas ── */
+.merced-alert-box {
+    width: 100%;
+    max-width: 600px;
+    margin-bottom: 20px;
+}
+
+.merced-alert-box--wide {
+    max-width: 900px;
+}
+
+/* ── Tarjetas de examen ── */
+.merced-card {
+    background: white;
+    border: 1px solid var(--merced-border);
+    border-radius: 8px;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.merced-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.merced-card--inscrito {
+    border-color: var(--merced-red);
+    border-width: 2px;
+}
+
+.merced-card--resultado {
+    border-color: var(--merced-red);
+    border-width: 2px;
+    background: linear-gradient(135deg, #fff9f9, #fff5f0);
+}
+
+.merced-badge-disponible {
+    background: var(--merced-red-light);
+    color: var(--merced-red);
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.75rem;
+}
+
+.merced-badge-inscrito {
+    background: #d1fae5;
+    color: #065f46;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.75rem;
+}
+
+.merced-section-title {
+    font-weight: 700;
+    margin-bottom: 16px;
+    color: var(--merced-text);
+    font-size: 1.1rem;
+    width: 100%;
+    max-width: 900px;
+}
+
+.merced-section-title i {
+    margin-right: 8px;
+    color: var(--merced-red);
+}
+
+/* ── Panel estudiante ── */
+.merced-user-bar {
+    background-color: var(--merced-red);
+    color: white;
+    padding: 24px 30px;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 900px;
+    margin-bottom: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.merced-user-bar h2 {
+    margin: 0;
+    font-weight: 700;
+    font-size: 1.4rem;
+    color: white;
+}
+
+.merced-user-bar small {
+    opacity: 0.85;
+    font-size: 0.85rem;
+}
+
+.merced-content-wide {
+    width: 100%;
+    max-width: 900px;
+}
+
+/* ── Login administrativo ── */
+.merced-login-card {
+    width: 100%;
+    max-width: 480px;
+    background: var(--merced-form-bg);
+    padding: 35px 30px;
+    border-radius: 8px;
+    border: 1px solid var(--merced-border);
+}
+
+.merced-login-card .form-group {
+    margin-bottom: 1.25rem;
+}
+
+.merced-login-card .input-group-merced {
+    display: flex;
+    align-items: stretch;
+    background: white;
+    border-radius: 4px;
+    border: 1px solid #ced4da;
+    transition: border-color 0.2s;
+}
+
+.merced-login-card .input-group-merced:focus-within {
+    border-color: var(--merced-gray);
+}
+
+.merced-login-card .input-icon {
+    display: flex;
+    align-items: center;
+    padding: 0 0 0 1rem;
+    color: var(--merced-gray);
+    font-size: 1rem;
+}
+
+.merced-login-card .form-control-merced {
+    flex: 1;
+    border: none;
+    background: transparent;
+    padding: 0.8rem 1rem;
+    font-size: 0.95rem;
+    color: var(--merced-text);
+    outline: none;
+    font-family: 'Roboto', sans-serif;
+}
+
+.merced-login-card .password-toggle {
+    display: flex;
+    align-items: center;
+    padding: 0 1rem;
+    background: transparent;
+    border: none;
+    color: var(--merced-gray);
+    cursor: pointer;
+    font-size: 1.1rem;
+}
+
+.merced-login-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1rem 0 1.5rem;
+    font-size: 0.85rem;
+}
+
+.merced-link {
+    color: var(--merced-muted);
+    text-decoration: none;
+    font-size: 0.85rem;
+}
+
+.merced-link:hover {
+    color: var(--merced-red);
+}
+
+.merced-link--accent {
+    color: var(--merced-red);
+    font-weight: 500;
+}
+
+.merced-page .alert-info {
+    background: var(--merced-red-light);
+    color: var(--merced-red);
+    border: none;
+}
+
+.merced-page .alert-secondary {
+    background: #f3f4f6;
+    color: var(--merced-muted);
+    border: none;
+}
+
+/* ── Footer institucional ── */
+.merced-footer {
+    border-top: 1px dashed #ccc;
+    padding: 20px;
+    text-align: center;
+    color: var(--merced-muted);
+    font-size: 0.85rem;
+    line-height: 1.5;
+    margin: 0 40px 20px;
+    flex-shrink: 0;
+}
+
+/* ── Páginas de error ── */
+.merced-error-box {
+    text-align: center;
+    max-width: 480px;
+    padding: 48px 32px;
+    background: var(--merced-form-bg);
+    border-radius: 8px;
+    border: 1px solid var(--merced-border);
+}
+
+.merced-error-code {
+    font-size: 5rem;
+    font-weight: 900;
+    color: var(--merced-red);
+    line-height: 1;
+}
+
+/* ── Dashboard administrativo ── */
+.merced-admin-content {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.merced-admin-header {
+    text-align: center;
+    margin-bottom: 28px;
+}
+
+.merced-stat-card {
+    background: white;
+    border: 1px solid var(--merced-border);
+    border-radius: 8px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    height: 100%;
+}
+
+.merced-stat-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.merced-stat-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 8px;
+    background: var(--merced-red-light);
+    color: var(--merced-red);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    flex-shrink: 0;
+}
+
+.merced-stat-value {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--merced-text);
+    line-height: 1;
+}
+
+.merced-stat-label {
+    color: var(--merced-muted);
+    font-size: 0.8rem;
+    margin-top: 3px;
+}
+
+.merced-highlight-card {
+    background: var(--merced-red-light);
+    border: 2px solid var(--merced-red);
+    border-radius: 8px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    height: 100%;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.merced-highlight-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(156, 27, 34, 0.12);
+}
+
+.merced-highlight-card .merced-stat-icon {
+    background: var(--merced-red);
+    color: white;
+}
+
+.merced-highlight-value {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--merced-red);
+    margin-top: 4px;
+}
+
+.merced-table-card {
+    background: white;
+    border: 1px solid var(--merced-border);
+    border-radius: 8px;
+    overflow: hidden;
+    height: 100%;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.merced-table-card:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+}
+
+.merced-table-header {
+    background: var(--merced-red);
+    color: white;
+    padding: 14px 20px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.merced-table-card .table {
+    margin: 0;
+    font-size: 0.875rem;
+}
+
+.merced-table-card .table thead th {
+    background: var(--merced-form-bg);
+    border-bottom: 1px solid var(--merced-border);
+    color: var(--merced-gray-dark);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    padding: 12px 16px;
+}
+
+.merced-table-card .table tbody td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--merced-border);
+    vertical-align: middle;
+}
+
+.merced-table-card .table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.merced-table-card .table tbody tr:hover {
+    background: var(--merced-red-light);
+}
+
+.merced-badge-count {
+    background: var(--merced-red);
+    color: white;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.8rem;
+}
+
+.merced-empty-state {
+    text-align: center;
+    padding: 48px 20px;
+    color: var(--merced-muted);
+}
+
+.merced-empty-state i {
+    font-size: 2.5rem;
+    opacity: 0.3;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.merced-medal-gold { color: #f59e0b; }
+.merced-medal-silver { color: #9ca3af; }
+.merced-medal-bronze { color: #cd7f32; }
+
+.merced-admin-actions {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 28px;
+}
+
+/* ── Responsive ── */
+@media (max-width: 576px) {
+    .merced-header-large { font-size: 1.4rem; }
+    .merced-header-logo { font-size: 2.2rem; }
+    .merced-title { font-size: 1.6rem; }
+    .merced-subtitle { font-size: 1.1rem; }
+    .merced-search { flex-direction: column; }
+    .merced-search .merced-btn { width: 100%; }
+    .merced-footer { margin: 0 16px 16px; }
+    .merced-admin-header .merced-title { font-size: 1.5rem; }
+    .merced-user-bar { padding: 18px 20px; }
+    .merced-stat-value { font-size: 1.5rem; }
+}
+
+[data-bs-theme=dark] .merced-subtitle { color: var(--merced-muted); }
+[data-bs-theme=dark] .merced-card,
+[data-bs-theme=dark] .merced-stat-card,
+[data-bs-theme=dark] .merced-table-card { background: #1e293b; }
+[data-bs-theme=dark] .merced-card--resultado { background: linear-gradient(135deg, #1a2d4a, #1e293b); }
+[data-bs-theme=dark] .merced-form-container,
+[data-bs-theme=dark] .merced-login-card,
+[data-bs-theme=dark] .merced-error-box { background: #1e293b; }
+[data-bs-theme=dark] .merced-readonly { background-color: #374151; color: var(--merced-muted); }
+[data-bs-theme=dark] .merced-page .form-control,
+[data-bs-theme=dark] .merced-page .form-select { background: #0f172a; color: var(--merced-text); border-color: var(--merced-border); }
+[data-bs-theme=dark] .merced-page .alert-secondary { background: #1e293b; }
+[data-bs-theme=dark] .merced-login-card .input-group-merced { background: #0f172a; border-color: var(--merced-border); }
+[data-bs-theme=dark] .merced-login-card .form-control-merced { color: var(--merced-text); }
+[data-bs-theme=dark] .merced-table-card .table thead th { background: #1a2d4a; }
+[data-bs-theme=dark] .merced-table-card .table tbody td { border-color: var(--merced-border); }
+[data-bs-theme=dark] .merced-table-card .table tbody tr:hover { background: #1a2d4a; }
+[data-bs-theme=dark] .merced-footer { border-top-color: #374151; }
+[data-bs-theme=dark] .merced-badge-inscrito { background: #064e3b; color: #34d399; }
+[data-bs-theme=dark] .merced-user-bar { background-color: var(--merced-red); }
+[data-bs-theme=dark] .merced-highlight-card { background: #1a2d4a; }
+[data-bs-theme=dark] .merced-table-header { background: var(--merced-red-dark); }
+[data-bs-theme=dark] .merced-card--resultado { background: linear-gradient(135deg, #1a2d4a, #1e293b); }
+[data-bs-theme=dark] .tour-bubble { background: #1e293b; border-color: var(--merced-border); }
+[data-bs-theme=dark] .tour-bubble::before { background: #1e293b; border-color: var(--merced-border); }
+[data-bs-theme=dark] .tour-bubble h6 { color: var(--merced-red); }
+[data-bs-theme=dark] .tour-bubble p { color: var(--merced-text); }
+[data-bs-theme=dark] .tour-step-indicator { color: var(--merced-muted); }
+[data-bs-theme=dark] .merced-page .alert-success { background: #064e3b; color: #34d399; }
+[data-bs-theme=dark] .merced-page .alert-danger { background: #450a0a; color: #f87171; }
+[data-bs-theme=dark] .merced-page .alert-info { background: #1a2d4a; color: var(--merced-red); }
