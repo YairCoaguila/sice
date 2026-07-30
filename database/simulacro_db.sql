@@ -272,9 +272,9 @@ SELECT
 -- ── DATOS DE PRUEBA ───────────────────────────────────────────────
 
 INSERT INTO usuario (username,password,rol,estado) VALUES
-('admin','admin123','administrador','ACTIVO'),
-('docente01','doc123','docente','ACTIVO'),
-('digitador01','dig123','digitador','ACTIVO')
+('admin','4ZNdAlA//hJQ0dxojbRdZA==:FGRjmtK5KYdsVejcwMIknNkrJMB7cSGwAbiFeXAirpA=','administrador','ACTIVO'),
+('docente01','wfsTwlVEXirB0u18ft8CFg==:q6Z00PhIJNeIKhn5mWB8cKkstp34PRiKRKK0I3zmbyw=','docente','ACTIVO'),
+('digitador01','f25lXPQp5rtk3ufDJtGO+w==:giA1YH6xebZLgnxvuAJu8xO3qs70HrdO69sdPLkS0cY=','digitador','ACTIVO')
 ON CONFLICT (username) DO NOTHING;
 
 INSERT INTO grado (nombre,nivel,participa) VALUES

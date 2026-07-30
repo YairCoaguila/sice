@@ -155,8 +155,10 @@ String[] colArr = cols.split("\\|");
                                 %>
                                 <tr>
                                     <td class="text-muted"><%=n++%></td>
-                                    <% for (String v : vals) { %>
-                                        <td><%=HtmlUtil.e(v)%></td>
+                                    <% for (int ci = 0; ci < vals.length; ci++) {
+                                        boolean isHtml = (ci == vals.length - 1) && ("periodos".equals(entityType) || "grados".equals(entityType));
+                                    %>
+                                        <td><%= isHtml ? vals[ci] : HtmlUtil.e(vals[ci]) %></td>
                                     <% } %>
                                     <td>
                                         <div class="d-flex gap-1">
