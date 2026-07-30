@@ -84,8 +84,13 @@ import java.util.Set;
                 mapaRankingGrado.put(r.getIdExamen(), r.getRankingGrado());
             }
 
-            // Cargar aulas asignadas a examenes
-            Map<Integer, String> mapaAulas = examenDAO.buscarAulasPorExamenes();
+            // Cargar aulas desde las inscripciones del alumno
+            Map<Integer, String> mapaAulas = new HashMap<>();
+            for (Inscripcion ins : inscripciones) {
+                if (!"CANCELADO".equals(ins.getEstado()) && ins.getAulaCodigo() != null) {
+                    mapaAulas.put(ins.getIdExamen(), ins.getAulaCodigo());
+                }
+            }
 
             // Cargar profesor solo para examenes en los que esta inscrito
             Map<Integer, String> mapaProfesores = new HashMap<>();
