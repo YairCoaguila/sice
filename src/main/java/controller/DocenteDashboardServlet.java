@@ -87,6 +87,26 @@ import java.util.*;
             List<ExamenAsignacion> examenesAsignados = examenAsignacionDAO.listarPorDocente(docente.getId());
             request.setAttribute("examenesAsignados", examenesAsignados);
 
+            // Alumnos inscritos en examenes del docente
+            Map<String, Object> alumnosPorExamen = new LinkedHashMap<>();
+            for (ExamenAsignacion ea : examenesAsignados) {
+                String key = ea.getIdExamen() + "|" + ea.getExamenNombre() + "|" + ea.getAulaCodigo();
+                List<model.Inscripcion> inscritos = new dao.InscripcionDAO().listarPorExamen(ea.getIdExamen());
+                List<Map<String, Object>> rows = new ArrayList<>();
+                for (model.Inscripcion ins : inscritos) {
+                    model.Alumno a = alumnoDAO.buscarPorId(ins.getIdAlumno());
+                    if (a == null) continue;
+                    Map<String, Object> row = new LinkedHashMap<>();
+                    row.put("alumno", a);
+                    List<Resultado> resultados = resultadoDAO.listarPorAlumno(a.getId());
+                    row.put("resultados", resultados);
+                    row.put("aula", ins.getAulaCodigo() != null ? ins.getAulaCodigo() : "—");
+                    rows.add(row);
+                }
+                if (!rows.isEmpty()) alumnosPorExamen.put(key, rows);
+            }
+            request.setAttribute("alumnosPorExamen", alumnosPorExamen);
+
         } catch (Exception e) {
             log.log(Level.SEVERE, "Error", e);
             request.setAttribute("error", "Error al cargar datos: " + e.getMessage());

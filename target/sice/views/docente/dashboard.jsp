@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
-<%@ page import="model.Usuario, java.util.*, model.DocenteAula, model.Alumno, model.Resultado, model.Docente, model.ExamenAsignacion, util.HtmlUtil" %>
+<%@ page import="model.Usuario, java.util.*, model.DocenteAula, model.Alumno, model.Resultado, model.Docente, model.ExamenAsignacion, model.Inscripcion, util.HtmlUtil" %>
 <%
 Usuario cu = (Usuario) request.getAttribute("currentUser");
 Docente docente = (Docente) request.getAttribute("docente");
@@ -30,12 +30,12 @@ String nombreDocente = docente != null ? docente.getApellidoPaterno() + " " + do
                 <div class="sidebar-subtitle">Panel Docente</div>
             </div>
         </div>
-        <nav class="sidebar-nav">
-            <div class="nav-label">Principal</div>
-            <a href="<%=ctx%>/docente/dashboard" class="nav-item active">
-                <i class="bi bi-speedometer2"></i><span>Mi Panel</span>
-            </a>
-        </nav>
+            <nav class="sidebar-nav">
+                <div class="nav-label">Principal</div>
+                <a href="<%=ctx%>/docente/dashboard" class="nav-item active">
+                    <i class="bi bi-speedometer2"></i><span>Mi Panel</span>
+                </a>
+            </nav>
         <div class="sidebar-footer">
             <a href="<%=ctx%>/logout" class="nav-item" style="color:rgba(255,255,255,.7)">
                 <i class="bi bi-box-arrow-right"></i><span>Cerrar Sesión</span>
@@ -187,6 +187,74 @@ String nombreDocente = docente != null ? docente.getApellidoPaterno() + " " + do
             <% } %>
             <% if(!tieneAulas && !tieneExamenes){ %>
                 <div class="empty-state"><i class="bi bi-person-x"></i><h5>Sin asignaciones</h5><p class="text-muted">Aún no te han asignado exámenes para supervisar. Contacta al administrador.</p></div>
+            <% } %>
+
+            <%-- Alumnos inscritos en examenes del docente --%>
+            <% Map<String, Object> alumnosPorExamen = (Map<String, Object>) request.getAttribute("alumnosPorExamen");
+               if (alumnosPorExamen != null && !alumnosPorExamen.isEmpty()) { %>
+                <div class="mt-4">
+                    <h5 class="mb-3"><i class="bi bi-people-fill me-2"></i>Alumnos por Examen</h5>
+                    <% for (Map.Entry<String, Object> entry : alumnosPorExamen.entrySet()) {
+                        String[] parts = entry.getKey().split("\\|");
+                        String exNombre = parts.length > 1 ? parts[1] : "";
+                        String exAula = parts.length > 2 ? parts[2] : "";
+                        List<Map<String, Object>> rows = (List<Map<String, Object>>) entry.getValue();
+                    %>
+                    <div class="card mb-3">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <span><i class="bi bi-file-earmark-text me-2"></i><%= HtmlUtil.e(exNombre) %></span>
+                            <span class="badge bg-secondary"><%= exAula %></span>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-hover mb-0">
+                                <thead><tr><th>#</th><th>Alumno</th><th>DNI</th><th>Aula</th><th></th></tr></thead>
+                                <tbody>
+                                <% int idx2 = 0; for (Map<String, Object> row : rows) { idx2++;
+                                    Alumno a = (Alumno) row.get("alumno");
+                                    String aula = (String) row.get("aula");
+                                    List<Resultado> res = (List<Resultado>) row.get("resultados");
+                                %>
+                                <tr>
+                                    <td><%= idx2 %></td>
+                                    <td><strong><%= HtmlUtil.e(a.getApellidoPaterno()) %> <%= HtmlUtil.e(a.getApellidoMaterno()) %>, <%= HtmlUtil.e(a.getNombres()) %></strong></td>
+                                    <td><%= HtmlUtil.e(a.getDni()) %></td>
+                                    <td><span class="badge bg-info"><%= HtmlUtil.e(aula) %></span></td>
+                                    <td>
+                                        <% if (res != null && !res.isEmpty()) { %>
+                                            <button class="btn btn-sm btn-outline-primary" type="button" data-bs-toggle="collapse" data-bs-target="#detEx_<%= idx2 %>">
+                                                <i class="bi bi-eye"></i> Resultados
+                                            </button>
+                                        <% } %>
+                                    </td>
+                                </tr>
+                                <% if (res != null && !res.isEmpty()) { %>
+                                <tr class="collapse" id="detEx_<%= idx2 %>">
+                                    <td colspan="5" class="p-0">
+                                        <div class="p-3" style="background:#f9fafb;">
+                                            <table class="table table-sm table-bordered mb-0" style="font-size:.8rem;">
+                                                <thead><tr><th>Examen</th><th>Puntaje</th><th>%</th><th>Ranking</th></tr></thead>
+                                                <tbody>
+                                                <% for (Resultado r : res) { %>
+                                                <tr>
+                                                    <td><%= r.getExamenNombre() != null ? HtmlUtil.e(r.getExamenNombre()) : "ID "+r.getIdExamen() %></td>
+                                                    <td><%= String.format("%.2f", r.getPuntaje()) %></td>
+                                                    <td><strong><%= String.format("%.1f", r.getPorcentaje()) %>%</strong></td>
+                                                    <td><%= r.getRankingGeneral() > 0 ? "#"+r.getRankingGeneral() : "N/A" %></td>
+                                                </tr>
+                                                <% } %>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <% } %>
+                                <% } %>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <% } %>
+                </div>
             <% } %>
         </div>
     </div>
