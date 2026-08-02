@@ -33,6 +33,13 @@ public class ExamenAsignacionDAO {
             return false;
         } catch(SQLException e){throw new RuntimeException(e);}
     }
+    public boolean docenteYaAsignado(int idExamen, int idDocente) {
+        try(Connection c=Conexion.getConexion(); PreparedStatement ps=c.prepareStatement("SELECT 1 FROM examen_asignacion WHERE id_examen=? AND id_docente=? LIMIT 1")){
+            ps.setInt(1,idExamen); ps.setInt(2,idDocente);
+            try(ResultSet rs=ps.executeQuery()){ if(rs.next()) return true; }
+            return false;
+        } catch(SQLException e){throw new RuntimeException(e);}
+    }
     public void eliminarPorDocente(int idDocente) {
         try(Connection c=Conexion.getConexion(); PreparedStatement ps=c.prepareStatement("DELETE FROM examen_asignacion WHERE id_docente=?")){
             ps.setInt(1,idDocente); ps.executeUpdate();
