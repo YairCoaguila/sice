@@ -111,4 +111,23 @@ public class InscripcionDAO extends GenericDAO<Inscripcion> {
             executeUpdate("UPDATE inscripcion SET id_aula=? WHERE id=?", aulas.get(idxAula).getId(), ins.getId());
         }
     }
+
+    public void asignarAulaAutomaticaIndividual(int idInscripcion, int idExamen) {
+        List<Aula> aulas = listarAulas();
+        if (aulas.isEmpty()) return;
+        aulas.sort((a, b) -> Integer.compare(b.getCapacidad(), a.getCapacidad()));
+        for (Aula aula : aulas) {
+            int ocupadas = queryInt(
+                    "SELECT COUNT(*) FROM inscripcion WHERE id_examen=? AND id_aula=? AND estado<>'CANCELADO'",
+                    idExamen, aula.getId());
+            if (ocupadas < aula.getCapacidad()) {
+                executeUpdate("UPDATE inscripcion SET id_aula=? WHERE id=?", aula.getId(), idInscripcion);
+                return;
+            }
+        }
+    }
+
+    private List<Aula> listarAulas() {
+        return new AulaDAO().listar();
+    }
 }

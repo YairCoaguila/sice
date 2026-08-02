@@ -76,6 +76,7 @@ import java.time.LocalDateTime;
                     existente.setAnio(anio);
                     existente.setPeriodo(examen.getPeriodo());
                     inscripcionDAO.reactivar(existente);
+                    inscripcionDAO.asignarAulaAutomaticaIndividual(existente.getId(), idExamen);
                     request.getSession().setAttribute("msg", "¡Inscripción reactivada exitosamente!");
                 } else {
                     String codigo = inscripcionDAO.generarCodigo(anio);
@@ -88,7 +89,8 @@ import java.time.LocalDateTime;
                     inscripcion.setPeriodo(examen.getPeriodo());
                     inscripcion.setFechaInscripcion(LocalDateTime.now());
                     inscripcion.setEstado("ACTIVO");
-                    inscripcionDAO.insertar(inscripcion);
+                    int idNueva = inscripcionDAO.insertar(inscripcion);
+                    inscripcionDAO.asignarAulaAutomaticaIndividual(idNueva, idExamen);
                     request.getSession().setAttribute("msg", "¡Inscripción exitosa!");
                 }
             }

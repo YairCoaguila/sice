@@ -21,7 +21,7 @@ public class ConstanciaPDF {
 
     private ConstanciaPDF() {}
 
-    private static final float MARGIN = 56f;
+    private static final float MARGIN = 40f;
 
     public static void generar(OutputStream out, Inscripcion i) throws IOException {
         DateTimeFormatter df = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -81,7 +81,7 @@ public class ConstanciaPDF {
             hdr.addCell(cLogo);
 
             doc.add(hdr);
-            doc.add(new Paragraph(" ", fCuerpo));
+            doc.add(new Paragraph(" ", new Font(Font.HELVETICA, 8)));
 
             // ── Comisión ──
             Paragraph comision = new Paragraph("COMISIÓN DE ADMISIÓN", fComision);
@@ -103,7 +103,7 @@ public class ConstanciaPDF {
             // ── Título principal ──
             Paragraph titulo = new Paragraph("CONSTANCIA DE PREINSCRIPCIÓN VIRTUAL", fTitulo);
             titulo.setAlignment(Element.ALIGN_CENTER);
-            titulo.setSpacingBefore(18);
+            titulo.setSpacingBefore(10);
             titulo.setSpacingAfter(2);
             doc.add(titulo);
 
@@ -111,14 +111,14 @@ public class ConstanciaPDF {
                     "Simulacro de Admisión " + i.getAnio() + " – " + nvl(i.getPeriodo()) + " | " + nvl(i.getExamenNombre()),
                     fSub);
             sub.setAlignment(Element.ALIGN_CENTER);
-            sub.setSpacingAfter(22);
+            sub.setSpacingAfter(12);
             doc.add(sub);
 
             // ── Introducción ──
             Paragraph intro = new Paragraph(
                     "La Comisión de Admisión de la I.E.P. San José hace constar que el(la) postulante:", fCuerpo);
             intro.setAlignment(Element.ALIGN_LEFT);
-            intro.setSpacingAfter(16);
+            intro.setSpacingAfter(10);
             doc.add(intro);
 
             // ── Nombre en recuadro ──
@@ -129,12 +129,12 @@ public class ConstanciaPDF {
             nbc.setBorder(Rectangle.BOX);
             nbc.setBorderWidth(1f);
             nbc.setBorderColor(Color.BLACK);
-            nbc.setPadding(12);
+            nbc.setPadding(9);
             nbc.setHorizontalAlignment(Element.ALIGN_CENTER);
             nbc.setVerticalAlignment(Element.ALIGN_MIDDLE);
             nameBox.addCell(nbc);
             doc.add(nameBox);
-            doc.add(new Paragraph(" ", fCuerpo));
+            doc.add(new Paragraph(" ", new Font(Font.HELVETICA, 7)));
 
             // ── DATOS PERSONALES ──
             Paragraph datosTit = new Paragraph("DATOS PERSONALES", fDatosTit);
@@ -154,7 +154,7 @@ public class ConstanciaPDF {
             addDato(datos, "Código de inscripción:", nvl(i.getCodigoInscripcion()), fLabel, fVal);
             addDato(datos, "Fecha de inscripción:", fi, fLabel, fVal);
             doc.add(datos);
-            doc.add(new Paragraph(" ", fCuerpo));
+            doc.add(new Paragraph(" ", new Font(Font.HELVETICA, 7)));
 
             // ── Párrafos explicativos ──
             String fechaEx = i.getExamenFecha() != null ? i.getExamenFecha().format(df) : "por definir";
@@ -163,14 +163,14 @@ public class ConstanciaPDF {
                     + nvl(i.getExamenNombre()) + " programado para el día " + fechaEx
                     + ". Su participación queda registrada en el sistema oficial de la institución.", fCuerpo);
             p1.setAlignment(Element.ALIGN_JUSTIFIED);
-            p1.setSpacingAfter(10);
+            p1.setSpacingAfter(8);
             doc.add(p1);
 
             Paragraph p2 = new Paragraph(
                     "Se recomienda presentarse con 20 minutos de anticipación en el aula asignada, portando su DNI y esta "
                     + "constancia impresa. Cualquier duda, comunicarse con la Comisión de Admisión.", fCuerpo);
             p2.setAlignment(Element.ALIGN_JUSTIFIED);
-            p2.setSpacingAfter(18);
+            p2.setSpacingAfter(12);
             doc.add(p2);
 
             // ── NOTA ──
@@ -181,7 +181,7 @@ public class ConstanciaPDF {
                     + "de admisión. Verifique su autenticidad escaneando el código QR ubicado en la parte inferior izquierda.",
                     fCuerpo));
             nota.setAlignment(Element.ALIGN_JUSTIFIED);
-            nota.setSpacingAfter(50);
+            nota.setSpacingAfter(26);
             doc.add(nota);
 
             // ── Parte inferior: QR izquierda, fecha y firma derecha ──
@@ -241,12 +241,12 @@ public class ConstanciaPDF {
     private static void addDato(PdfPTable t, String label, String val, Font fl, Font fv) {
         PdfPCell lc = new PdfPCell(new Phrase(label, fl));
         lc.setBorder(Rectangle.NO_BORDER);
-        lc.setPadding(4);
+        lc.setPadding(3);
         PdfPCell vc = new PdfPCell(new Phrase(val != null ? val : "-", fv));
         vc.setBorder(Rectangle.BOTTOM);
         vc.setBorderWidth(0.4f);
         vc.setBorderColor(new Color(210, 210, 210));
-        vc.setPadding(4);
+        vc.setPadding(3);
         t.addCell(lc);
         t.addCell(vc);
     }
