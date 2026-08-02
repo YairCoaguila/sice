@@ -12,7 +12,6 @@
 <nav aria-label="breadcrumb" class="mb-3"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="<%=ctx%>/app/examenes">Exámenes</a></li><li class="breadcrumb-item active">Asignar docentes</li></ol></nav>
 <div class="page-header"><div><h1 class="page-title"><i class="bi bi-person-check-fill me-2 text-primary"></i><%=ex!=null?ex.getNombre():"—"%></h1><p class="page-subtitle"><%=ex!=null?ex.getGradoNombre():"—"%> • <%=ex!=null?ex.getPeriodo():"—"%> <%=ex!=null?ex.getAnio():""%></p></div>
 <div>
-<span class="me-2 text-muted small">DEBUG:</span>
 <a href="<%=ctx%>/app/examen-asignacion?accion=asignar-aulas&idExamen=<%=ex.getId()%>" class="btn btn-success" onclick="return confirm('¿Asignar aulas automáticamente a todos los inscritos según capacidad?')"><i class="bi bi-diagram-3-fill me-1"></i>Asignar Aulas</a>
 </div></div>
 

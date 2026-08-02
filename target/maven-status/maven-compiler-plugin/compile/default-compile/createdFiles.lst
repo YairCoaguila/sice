@@ -22,6 +22,7 @@ model\Carrera.class
 model\Docente.class
 util\PasswordUtil.class
 dao\SeccionDAO.class
+util\ConstanciaPDF.class
 controller\AlumnoServlet.class
 controller\InscripcionServlet.class
 dao\DocenteDAO.class
