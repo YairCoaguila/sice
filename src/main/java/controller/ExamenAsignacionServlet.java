@@ -42,6 +42,11 @@ public class ExamenAsignacionServlet extends HttpServlet {
         ExamenAsignacion ea=new ExamenAsignacion(); ea.setIdExamen(idEx);
         ea.setIdDocente(Integer.parseInt(q.getParameter("idDocente")));
         ea.setIdAula(Integer.parseInt(q.getParameter("idAula")));
+        if (dao.aulaYaAsignada(idEx, ea.getIdAula())) {
+            q.getSession().setAttribute("msgError","Ese aula ya está asignada a otro docente de este examen.");
+            r.sendRedirect(q.getContextPath()+"/app/examen-asignacion?idExamen="+idEx);
+            return;
+        }
         dao.insertar(ea);
         q.getSession().setAttribute("msg","Docente asignado al examen.");
         r.sendRedirect(q.getContextPath()+"/app/examen-asignacion?idExamen="+idEx);

@@ -21,6 +21,18 @@ public class ExamenAsignacionDAO {
             ps.setInt(1,ea.getIdExamen()); ps.setInt(2,ea.getIdDocente()); ps.setInt(3,ea.getIdAula()); ps.executeUpdate();
         } catch(SQLException e){throw new RuntimeException(e);}
     }
+    public ExamenAsignacion buscarPorExamenYAula(int idExamen, int idAula) {
+        try(Connection c=Conexion.getConexion(); PreparedStatement ps=c.prepareStatement("SELECT * FROM vw_examen_asignacion WHERE id_examen=? AND id_aula=?")){
+            ps.setInt(1,idExamen); ps.setInt(2,idAula); try(ResultSet rs=ps.executeQuery()){ if(rs.next()) return map(rs); }
+        } catch(SQLException e){throw new RuntimeException(e);} return null;
+    }
+    public boolean aulaYaAsignada(int idExamen, int idAula) {
+        try(Connection c=Conexion.getConexion(); PreparedStatement ps=c.prepareStatement("SELECT 1 FROM examen_asignacion WHERE id_examen=? AND id_aula=? LIMIT 1")){
+            ps.setInt(1,idExamen); ps.setInt(2,idAula);
+            try(ResultSet rs=ps.executeQuery()){ if(rs.next()) return true; }
+            return false;
+        } catch(SQLException e){throw new RuntimeException(e);}
+    }
     public void eliminarPorDocente(int idDocente) {
         try(Connection c=Conexion.getConexion(); PreparedStatement ps=c.prepareStatement("DELETE FROM examen_asignacion WHERE id_docente=?")){
             ps.setInt(1,idDocente); ps.executeUpdate();

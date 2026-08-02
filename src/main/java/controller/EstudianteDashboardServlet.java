@@ -3,6 +3,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import dao.ExamenDAO;
+import dao.ExamenAsignacionDAO;
 import dao.InscripcionDAO;
 import dao.ResultadoDAO;
 import jakarta.servlet.ServletException;
@@ -11,6 +12,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.Alumno;
 import model.Examen;
+import model.ExamenAsignacion;
 import model.Inscripcion;
 import model.Resultado;
 import java.io.IOException;
@@ -27,6 +29,7 @@ import java.util.Set;
     private ExamenDAO examenDAO = new ExamenDAO();
     private InscripcionDAO inscripcionDAO = new InscripcionDAO();
     private ResultadoDAO resultadoDAO = new ResultadoDAO();
+    private ExamenAsignacionDAO examenAsignacionDAO = new ExamenAsignacionDAO();
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) 
@@ -92,12 +95,15 @@ import java.util.Set;
                 }
             }
 
-            // Cargar profesor solo para examenes en los que esta inscrito
+            // Cargar docente asignado al examen segun el aula del alumno
             Map<Integer, String> mapaProfesores = new HashMap<>();
-            for (Examen e : inscritosList) {
-                String prof = examenDAO.buscarProfesorPorGradoSeccionPeriodo(
-                    alumno.getIdGrado(), alumno.getIdSeccion(), e.getAnio(), e.getPeriodo());
-                if (prof != null) mapaProfesores.put(e.getId(), prof);
+            for (Inscripcion ins : inscripciones) {
+                if (!"CANCELADO".equals(ins.getEstado()) && ins.getIdAula() > 0) {
+                    ExamenAsignacion ea = examenAsignacionDAO.buscarPorExamenYAula(ins.getIdExamen(), ins.getIdAula());
+                    if (ea != null && ea.getDocenteNombre() != null) {
+                        mapaProfesores.put(ins.getIdExamen(), ea.getDocenteNombre());
+                    }
+                }
             }
             
             request.setAttribute("examenesDisponibles", disponibles);
