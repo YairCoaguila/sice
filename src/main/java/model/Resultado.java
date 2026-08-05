@@ -1,6 +1,7 @@
 package model;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import util.NombreUtil;
 public class Resultado implements Serializable {
     private int id; private int idAlumno; private int idExamen;
     private double puntaje; private int correctas; private int incorrectas; private int enBlanco; private double porcentaje;
@@ -17,7 +18,7 @@ public class Resultado implements Serializable {
     public int getEnBlanco(){return enBlanco;} public void setEnBlanco(int b){this.enBlanco=b;}
     public double getPorcentaje(){return porcentaje;} public void setPorcentaje(double p){this.porcentaje=p;}
     public LocalDateTime getFechaRegistro(){return fechaRegistro;} public void setFechaRegistro(LocalDateTime f){this.fechaRegistro=f;}
-    public String getAlumnoNombre(){return alumnoNombre;} public void setAlumnoNombre(String a){this.alumnoNombre=a;}
+    public String getAlumnoNombre(){return NombreUtil.desdeCompleto(alumnoNombre);} public void setAlumnoNombre(String a){this.alumnoNombre=a;}
     public String getAlumnoDni(){return alumnoDni;} public void setAlumnoDni(String a){this.alumnoDni=a;}
     public String getExamenNombre(){return examenNombre;} public void setExamenNombre(String e){this.examenNombre=e;}
     public String getGradoNombre(){return gradoNombre;} public void setGradoNombre(String g){this.gradoNombre=g;}

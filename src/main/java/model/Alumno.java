@@ -2,6 +2,7 @@ package model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import util.NombreUtil;
 
 public class Alumno implements Serializable {
     private int id;
@@ -23,13 +24,13 @@ public class Alumno implements Serializable {
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
 
-    public String getNombres() { return nombres; }
+    public String getNombres() { return NombreUtil.nombres(nombres); }
     public void setNombres(String nombres) { this.nombres = nombres; }
 
-    public String getApellidoPaterno() { return apellidoPaterno; }
+    public String getApellidoPaterno() { return NombreUtil.apellidos(apellidoPaterno); }
     public void setApellidoPaterno(String apellidoPaterno) { this.apellidoPaterno = apellidoPaterno; }
 
-    public String getApellidoMaterno() { return apellidoMaterno; }
+    public String getApellidoMaterno() { return NombreUtil.apellidos(apellidoMaterno); }
     public void setApellidoMaterno(String apellidoMaterno) { this.apellidoMaterno = apellidoMaterno; }
 
     public String getDni() { return dni; }
@@ -66,6 +67,6 @@ public class Alumno implements Serializable {
     public void setColegio(String colegio) { this.colegio = colegio; }
 
     public String getNombreCompleto() {
-        return apellidoPaterno + " " + apellidoMaterno + ", " + nombres;
+        return NombreUtil.completo(apellidoPaterno, apellidoMaterno, nombres);
     }
 }

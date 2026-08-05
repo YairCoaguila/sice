@@ -2,6 +2,7 @@ package model;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import util.NombreUtil;
 public class Inscripcion implements Serializable {
     private int id; private String codigoInscripcion; private int idAlumno; private int idExamen; private int idCarrera;
     private int anio; private String periodo; private LocalDateTime fechaInscripcion; private String estado;
@@ -18,7 +19,7 @@ public class Inscripcion implements Serializable {
     public String getPeriodo(){return periodo;} public void setPeriodo(String p){this.periodo=p;}
     public LocalDateTime getFechaInscripcion(){return fechaInscripcion;} public void setFechaInscripcion(LocalDateTime f){this.fechaInscripcion=f;}
     public String getEstado(){return estado;} public void setEstado(String e){this.estado=e;}
-    public String getAlumnoNombre(){return alumnoNombre;} public void setAlumnoNombre(String a){this.alumnoNombre=a;}
+    public String getAlumnoNombre(){return NombreUtil.desdeCompleto(alumnoNombre);} public void setAlumnoNombre(String a){this.alumnoNombre=a;}
     public String getAlumnoDni(){return alumnoDni;} public void setAlumnoDni(String a){this.alumnoDni=a;}
     public String getExamenNombre(){return examenNombre;} public void setExamenNombre(String e){this.examenNombre=e;}
     public String getCarreraNombre(){return carreraNombre;} public void setCarreraNombre(String c){this.carreraNombre=c;}
