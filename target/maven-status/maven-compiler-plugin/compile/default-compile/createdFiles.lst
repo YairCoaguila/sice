@@ -39,6 +39,7 @@ controller\ImportacionServlet.class
 model\Usuario.class
 dao\AulaDAO.class
 filter\AuthFilter.class
+util\NombreUtil.class
 dao\AlumnoDAO.class
 dao\AreaDAO.class
 model\Periodo.class

@@ -7,7 +7,7 @@ List<DocenteAula> asignaciones = (List<DocenteAula>) request.getAttribute("asign
 Map<String, Object> datosPorAsignacion = (Map<String, Object>) request.getAttribute("datosPorAsignacion");
 String error = (String) request.getAttribute("error"); String mensaje = (String) request.getAttribute("mensaje");
 String ctx = request.getContextPath();
-String nombreDocente = docente != null ? docente.getApellidoPaterno() + " " + docente.getApellidoMaterno() + ", " + docente.getNombres() : (cu != null ? cu.getUsername() : "");
+String nombreDocente = docente != null ? docente.getNombreCompleto() : (cu != null ? cu.getUsername() : "");
 %>
 <!DOCTYPE html>
 <html lang="es">
